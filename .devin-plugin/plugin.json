@@ -1,0 +1,11 @@
+{
+  "name": "ai-eng-os",
+  "version": "0.1.0",
+  "description": "AI Engineering OS: best-practice workflows for building with LLMs (evals first, versioned prompts, agent scaffolds, red-teaming, launch gates, experiment writeups), plus ML, causal inference and statistical inference domain packs. Reads project context from the working repo's context-library/ and writes to its outputs/.",
+  "author": { "name": "Alexandre Cela", "email": "alex@belvederedatasolutions.com" },
+  "license": "MIT",
+  "keywords": ["devin", "plugin", "ai-engineering", "evals", "llm", "agents", "ml", "causal-inference", "statistics"],
+  "requiredPlugins": [],
+  "optionalPlugins": ["alexandrecela10/PM-OS"],
+  "forbiddenPlugins": []
+}
