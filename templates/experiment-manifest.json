@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$comment": "One manifest per run at outputs/experiments/<YYYY-MM-DD>-<slug>/manifest.json. Every field below is required unless marked optional. Hash = sha256 of the file contents.",
+  "id": "2026-09-03-system-prompt-v4-tone",
+  "hypothesis": "Adding explicit refusal examples to the system prompt raises refusal precision on the safety golden set from 0.81 to >=0.90 without lowering task accuracy by more than 1 pt.",
+  "change": {
+    "type": "prompt | model | dataset | scaffold | tool | decoding | retrieval | training",
+    "description": "Single sentence. One variable only.",
+    "diff_ref": "git sha or PR url"
+  },
+  "tuple": {
+    "prompt": { "path": "prompts/system.md", "version": "v4", "sha256": "" },
+    "model": { "provider": "anthropic", "name": "claude-sonnet-4-5", "snapshot": "2025-09-29" },
+    "dataset": { "path": "evals/golden/safety-v3.jsonl", "version": "v3", "n": 412, "sha256": "" },
+    "grader": { "type": "exact | rubric-llm-judge | code | human", "path": "evals/graders/refusal.py", "rubric": "rubrics/refusal-v2.md", "judge_model": "optional", "sha256": "" },
+    "config": { "temperature": 0, "max_tokens": 1024, "seed": 7, "other": {} }
+  },
+  "baseline": { "run_id": "2026-08-28-system-prompt-v3", "metrics": { "refusal_precision": 0.81, "task_accuracy": 0.874 } },
+  "results": {
+    "metrics": {
+      "refusal_precision": { "value": 0.91, "ci95": [0.87, 0.94], "n": 412 },
+      "task_accuracy": { "value": 0.869, "ci95": [0.84, 0.90], "n": 1200 }
+    },
+    "cost_usd_per_1k": 3.42,
+    "latency_ms": { "p50": 1210, "p95": 2980 },
+    "delta_vs_baseline": { "refusal_precision": "+0.10 (outside CI)", "task_accuracy": "-0.005 (inside CI)" }
+  },
+  "traces": { "store": "langfuse | braintrust | wandb | local", "uri": "" },
+  "decision": "promote | iterate | discard",
+  "decision_rationale": "One or two sentences.",
+  "owner": "name",
+  "created_at": "2026-09-03T14:02:00Z"
+}
